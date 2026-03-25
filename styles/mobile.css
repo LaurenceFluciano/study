@@ -1,0 +1,23 @@
+@media (max-width: 1366px)
+{
+    .container > .formulario > div {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px)
+{
+    .hero {
+        display: none;
+    }
+
+    .formulario {
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .formulario > div {
+        width: 80%;
+    }
+}

@@ -1,0 +1,35 @@
+.hero
+{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--color-primary-brand);
+   
+}
+
+.hero--font
+{
+    color: var(--color-primary-surface);
+    font-family: "Datatype", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+.hero__quote {
+    display: block;
+    width: 80%;
+    font-size: 40px;
+}
+
+.hero__caption {
+    display: block;
+    margin-top: 30px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
