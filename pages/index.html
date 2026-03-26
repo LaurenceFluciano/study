@@ -22,33 +22,36 @@
                 <span>Portal Aluno</span>
             </div>
             <nav class="header__nav">
-                <a class="nav_item--active" href="index.html">Painel</a>
-                <a class="nav_item" href="">Disciplina</a>
-                <a class="nav_item" href="">Tutor IA</a>
-                <a class="nav_item" href="">Perfil</a>
+                <a class="header_item header_item--active" href="index.html">Painel</a>
+                <a class="header_item" href="">Disciplina</a>
+                <a class="header_item" href="">Tutor IA</a>
+                <a class="header_item" href="">Perfil</a>
             </nav>
         </div>
     </header>
 
-    <div class="container">
+    <!-- CONTAINER -->
+    <div class="container col--1">
+        <!-- CONTAINER HEADER -->
         <div class="container__header">
             <h1>Bom dia, João</h1>
             <p>Bem-vindo de volta à sua sessão de estudo focado. Você tem 2 tarefas para esta semana e está atualmente adiantado em seu cronograma de leitura.</p>
         </div>
 
+        <!-- CONTAINER CARDS -->
         <div class="container__card">
 
             <div class="card">
                 <span class="card__status">EM PROGRESSO</span>
                 
                 <div class="card__body">
-                    <h3 class="card__title">
-                        Front-end
-                        <br>
-                        <span>
+                    <div class="card__text">
+                        <span class="card__title">Front-end</span>
+                        <span class="card__subtitle">
                             Aula 2: Conceitos do desenvolvimento Front-end e GIT + Github.
                         </span>
-                    </h3>
+                    </div>
+
                     <button class="card__button button--primary">
                         Retomar Estudos
                     </button>
@@ -63,28 +66,71 @@
                 <span class="card__status">EM PROGRESSO</span>
 
                 <div class="card__body">
-                    <h3 class="card__title">
-                        UX Design
-                        <br>
-                        <span>
+                    <div class="card__text">
+                        <span class="card__title">UX Design</span>
+                        <span class="card__subtitle">
                             Aula 3: Usabilidade.
                         </span>
-                    </h3>
+                    </div>
                     <button class="card__button button--primary">
                         Retomar Estudos
                     </button>
                 </div>
 
                 <div class="card__progress">
-
+                    <div class="card__progress-bar"></div>
+                    <span class="card__progress-text">25%</span>
                 </div>
             </div>
 
         </div>
 
-
+        <!-- FOOTER CARDS -->
         <div class="footer__card">
+            <div class="card">
+                <div class="card__text">
+                    <span class="card__title h3--secondary">
+                        Tempo de Estudo
+                    </span>
+                    <br>
+                    <span class="card__value">
+                        12h 45m
+                    </span>
+                    <span class="card__description">
+                        Esta semana
+                    </span>
+                </div>
+            </div>
 
+            <div class="card">
+                <div class="card__text">
+                    <span class="card__title h3--secondary">
+                        Tarefas Pendentes
+                    </span>
+                    <br>
+                    <span class="card__value">
+                        2
+                    </span>
+                    <span class="card__description">
+                        Próximo vencimento em 2 dias
+                    </span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card__text">
+                    <span class="card__title h3--secondary">
+                        Discussões com IA
+                    </span>
+                    <br>
+                    <span class="card__value">
+                        8
+                    </span>
+                    <span class="card__description">
+                        Tópicos ativos
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 
