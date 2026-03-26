@@ -4,11 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-    font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
 }
 
 .formulario > div{
