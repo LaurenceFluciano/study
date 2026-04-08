@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: 400;
+    width: 100vw;
+    min-height: 100dvh;
+}
+
+/* Enunciados */
+
+.enunciado {
+    display: flex;
+    padding: 2rem 2rem;
+    align-items: center;
+}
+
+.enunciado__questao {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+.enunciado_numero {
+    font-size: 1rem;
+    font-weight: 900;
+}
+
+/* Alternativa items */
+
+.alternativas {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0px auto;
+    min-width: 800px;
+    width: 60%;
+}
+
+.alternativas__item {
+    font-size: 1.25rem;
+    border: 2px solid black;
+    border-radius: 24px;
+    transition: 250ms;
+    padding: 18px;
+    transition: 250ms;
+}
+
+.alternativas__item--selecionado {
+    transition: 250ms;
+    background-color: black;
+    color: white;
+}
+
+/* Selecoes */
+
+.selecoes {
+    display: flex;
+    width: 100%;
+    padding: 2rem 4rem;
+    justify-content: end;
+    align-items: center;
+}
+
+.botao {
+    background-color: white;
+    border: black 2px solid;
+    border-radius: 24px;
+    padding: 16px 32px;
+    font-weight: 600;
+    font-size: 1.25rem;
+    transition: 250ms;
+}
+
+.botao:hover {
+    transition: 250ms;
+    background-color: black;
+    color: white;
+}
+
+.botao--resposta {
+    transition: 250ms;
+    border: rgb(54, 88, 238) 2px solid;
+    background-color: rgb(54, 88, 238);
+    color: white;
+}
+
+.botao--resposta:hover {
+    transition: 250ms;
+    border: rgb(73, 103, 238) 2px solid;
+    background-color: rgb(73, 103, 238);
+    color: white;
+}
+
+.botao--desativado {
+    transition: 250ms;
+    border: gray 2px solid;
+    background-color: gray;
+    color: white;
+    cursor: not-allowed;
+}
+
+.botao--desativado:hover {
+    transition: 250ms;
+    border: gray 2px solid;
+    background-color: gray;
+    color: white;
+}
+
+
