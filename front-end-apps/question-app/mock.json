@@ -1,3 +1,104 @@
 {
-    
+    "questoes": [
+        {
+            "enunciado": "Em um triângulo equilátero de lado 6 cm, qual é a altura?",
+            "alternativas": [
+                "3√3 cm",
+                "6 cm",
+                "2√3 cm",
+                "4√3 cm"
+            ],
+            "resposta": 1
+        },
+        {
+            "enunciado": "Qual é a soma dos ângulos internos de um hexágono convexo?",
+            "alternativas": [
+                "540°",
+                "720°",
+                "900°",
+                "1080°"
+            ],
+            "resposta": 2
+        },
+        {
+            "enunciado": "Em um triângulo retângulo com catetos 3 e 4, qual é a hipotenusa?",
+            "alternativas": [
+                "5",
+                "6",
+                "7",
+                "4"
+            ],
+            "resposta": 1
+        },
+        {
+            "enunciado": "Qual é a medida de cada ângulo interno de um triângulo equilátero?",
+            "alternativas": [
+                "30°",
+                "45°",
+                "60°",
+                "90°"
+            ],
+            "resposta": 3
+        },
+        {
+            "enunciado": "Em uma circunferência de raio 5 cm, qual é o diâmetro?",
+            "alternativas": [
+                "5 cm",
+                "10 cm",
+                "15 cm",
+                "20 cm"
+            ],
+            "resposta": 2
+        },
+        {
+            "enunciado": "Qual é a área de um quadrado de lado 7 cm?",
+            "alternativas": [
+                "14 cm²",
+                "21 cm²",
+                "49 cm²",
+                "28 cm²"
+            ],
+            "resposta": 3
+        },
+        {
+            "enunciado": "Se dois ângulos são complementares e um mede 35°, qual é o outro?",
+            "alternativas": [
+                "45°",
+                "55°",
+                "65°",
+                "75°"
+            ],
+            "resposta": 2
+        },
+        {
+            "enunciado": "Qual é o perímetro de um triângulo com lados 5 cm, 6 cm e 7 cm?",
+            "alternativas": [
+                "18 cm",
+                "17 cm",
+                "16 cm",
+                "19 cm"
+            ],
+            "resposta": 1
+        },
+        {
+            "enunciado": "Quantas diagonais possui um pentágono?",
+            "alternativas": [
+                "5",
+                "7",
+                "10",
+                "15"
+            ],
+            "resposta": 1
+        },
+        {
+            "enunciado": "Qual é a área de um triângulo com base 10 cm e altura 6 cm?",
+            "alternativas": [
+                "30 cm²",
+                "60 cm²",
+                "20 cm²",
+                "40 cm²"
+            ],
+            "resposta": 1
+        }
+    ]
 }
