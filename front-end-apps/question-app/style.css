@@ -76,7 +76,7 @@ body {
     background-color: white;
     border: black 2px solid;
     border-radius: 24px;
-    padding: 16px 32px;
+    padding: 12px 32px;
     font-weight: 600;
     font-size: 1.25rem;
     transition: 250ms;
@@ -84,8 +84,8 @@ body {
 
 .botao:hover {
     transition: 250ms;
-    background-color: black;
-    color: white;
+    background-color: white;
+    border: black 2px solid;
 }
 
 .botao--resposta {
