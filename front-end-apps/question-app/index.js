@@ -44,7 +44,9 @@ function montarAlternativas(alternativas) {
 
         elemento.classList.add('alternativas__item');
         elemento.setAttribute('id', indice+1);
-        elemento.setAttribute('onClick', 'selecionarAlternativa(this)');        
+        // elemento.setAttribute('onClick', 'selecionarAlternativa(this)');
+        
+        elemento.addEventListener('click', selecionarAlternativa);
 
         pai.appendChild(elemento);
     }
@@ -59,39 +61,53 @@ function montarQuestao() {
     montarAlternativas(questaoAtual.alternativas);
 }
 
+/* BOTOES */
 
-function selecionarAlternativa(elemento) {
-    estadoUsuario.idAnterior = estadoUsuario.idSelecionado;
-    estadoUsuario.idSelecionado = elemento.getAttribute('id');
-    elemento.classList.add('alternativas__item--selecionado');
+function BotaoEnvio() {
+        const botao = document.getElementById("botao")
 
-    if (estadoUsuario.idAnterior != null) {
-        document.getElementById(estadoUsuario.idAnterior).classList.remove('alternativas__item--selecionado');
-    }
+        const state = {
+            currentFunction: selecionarAlternativa
+        }
 
-    document.querySelector('.botao').classList.remove("botao--desativado");
-    document.querySelector('.botao').classList.add("botao--resposta");
-    document.querySelector('.botao--resposta').setAttribute('onClick', 'responderQuestao(this)');
+        function selecionarAlternativa() {
+            estadoUsuario.idAnterior = estadoUsuario.idSelecionado;
+            estadoUsuario.idSelecionado = event.currentTarget.getAttribute('id');
+            botao.classList.add('alternativas__item--selecionado');
+
+            if (estadoUsuario.idAnterior != null) {
+                document.getElementById(estadoUsuario.idAnterior).classList.remove('alternativas__item--selecionado');
+            }
+
+            botao.classList.remove("botao--desativado");
+            botao.querySelector('.botao').classList.add("botao--resposta");
+
+            state.currentFunction = responderQuestao
+        }
+
+
+        function responderQuestao() {
+            botao.classList.remove("botao--resposta");
+            state.currentFunction = proximaQuestao
+
+            if (questaoAtual.resposta == estadoUsuario.idSelecionado)
+                alert("Alternativa correta!")
+            else 
+                alert("Alternativa incorreta")
+
+            botao.innerText = "Próximo";
+        }
+
+        const proximaQuestao = () => {
+            estadoUsuario.idQuestaoAtual += 1;
+            montarQuestao();
+            botao.innerText = "Responder";
+        }
+
+
+        return state
 }
 
-
-function responderQuestao(elemento) {
-    elemento.classList.remove("botao--resposta");
-    elemento.setAttribute('onClick', 'proximaQuestao(this)');
-
-    if (questaoAtual.resposta == estadoUsuario.idSelecionado)
-        alert("Alternativa correta!")
-    else 
-        alert("Alternativa incorreta")
-
-    elemento.innerText = "Próximo";
-}
-
-function proximaQuestao() {
-    estadoUsuario.idQuestaoAtual += 1;
-    montarQuestao();
-    elemento.innerText = "Responder";
-}
 
 
 
