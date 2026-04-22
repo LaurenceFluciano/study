@@ -44,7 +44,6 @@ function montarAlternativas(alternativas) {
 
         elemento.classList.add('alternativas__item');
         elemento.setAttribute('id', indice+1);
-        // elemento.setAttribute('onClick', 'selecionarAlternativa(this)');
         
         elemento.addEventListener('click', selecionarAlternativa);
 
@@ -55,60 +54,75 @@ function montarAlternativas(alternativas) {
 function montarQuestao() {
     const questoes = JSON.parse(localStorage.getItem('questoes'));
 
-    questaoAtual = questoes[estadoUsuario.idQuestaoAtual];
+    if (questoes.length > estadoUsuario.idQuestaoAtual) { 
+        questaoAtual = questoes[estadoUsuario.idQuestaoAtual];
+        montarEnunciado(questaoAtual.enunciado);
+        montarAlternativas(questaoAtual.alternativas);
+        return
+    } 
 
-    montarEnunciado(questaoAtual.enunciado);
-    montarAlternativas(questaoAtual.alternativas);
+    alert("Atividade completa!")
+}
+
+
+function selecionarAlternativa(event) {
+    const elementoClicado = event.currentTarget;
+
+    estadoUsuario.idAnterior = estadoUsuario.idSelecionado;
+    estadoUsuario.idSelecionado = elementoClicado.getAttribute('id');
+    elementoClicado.classList.add('alternativas__item--selecionado');
+
+    if (estadoUsuario.idAnterior != null) {
+        document.getElementById(estadoUsuario.idAnterior).classList.remove('alternativas__item--selecionado');
+    }
+
+    botaoEnvio()
 }
 
 /* BOTOES */
 
-function BotaoEnvio() {
+function criarGerenciadorBotao(callback) {
         const botao = document.getElementById("botao")
 
         const state = {
-            currentFunction: selecionarAlternativa
+            currentFunction: null
         }
 
-        function selecionarAlternativa() {
-            estadoUsuario.idAnterior = estadoUsuario.idSelecionado;
-            estadoUsuario.idSelecionado = event.currentTarget.getAttribute('id');
-            botao.classList.add('alternativas__item--selecionado');
-
-            if (estadoUsuario.idAnterior != null) {
-                document.getElementById(estadoUsuario.idAnterior).classList.remove('alternativas__item--selecionado');
-            }
-
-            botao.classList.remove("botao--desativado");
-            botao.querySelector('.botao').classList.add("botao--resposta");
-
+        const init = () => {
+            botao.classList.remove("botao--desativado")
+            botao.classList.add("botao--resposta");
             state.currentFunction = responderQuestao
         }
 
 
-        function responderQuestao() {
+        const  responderQuestao = () => {
             botao.classList.remove("botao--resposta");
-            state.currentFunction = proximaQuestao
-
+            
             if (questaoAtual.resposta == estadoUsuario.idSelecionado)
                 alert("Alternativa correta!")
             else 
                 alert("Alternativa incorreta")
 
             botao.innerText = "Próximo";
+            state.currentFunction = proximaQuestao
         }
 
         const proximaQuestao = () => {
             estadoUsuario.idQuestaoAtual += 1;
-            montarQuestao();
+            callback();
             botao.innerText = "Responder";
+            botao.classList.add("botao--desativado")
+            state.currentFunction = init
         }
 
+        state.currentFunction = init;
 
-        return state
+        botao.onclick = () => state.currentFunction();
+
+        return state.currentFunction
 }
 
 
-
+const botaoEnvio = criarGerenciadorBotao(montarQuestao);
 
 init()
