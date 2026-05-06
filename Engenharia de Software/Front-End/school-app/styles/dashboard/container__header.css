@@ -1,0 +1,17 @@
+.container__header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 2% 8%;
+}
+
+.container__header > h1 {
+    color: var(--color-primary-brand-100)
+}
+
+.container__header > p {
+    color: var(--color-primary-neutral-80);
+}
+
+
+
