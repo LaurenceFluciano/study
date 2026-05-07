@@ -1,17 +1,6 @@
 import { useState, type ChangeEvent } from 'react'
-
-type TaskStatus = |
-  'done' |
-  'todo'
-
-type TaskItem = {
-  id: string,
-  name: string,
-  description: string,
-  status: TaskStatus
-}
-
-
+import type { TaskItem } from './types/Task';
+import TaskItemCard from './components/Task';
 
 function App() {
   const [tasks, setTask] = useState<TaskItem[]>([]);
@@ -75,6 +64,20 @@ function App() {
       })
   }
 
+  const setDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setTask((prev) => {
+        return prev.map(task => {
+          if (task.id == e.target.id) {
+            return {
+              ...task,
+              description: e.target.value
+            } 
+          }
+          return task;
+        })
+      })
+  }
+
   const removeTask = (id: string) => {
      setTask((prev) => {
         return prev.filter(task => {
@@ -98,19 +101,13 @@ function App() {
           
         
           if (task.status == 'todo') {
-            return (
-              <div key={task.id} className='task'>
-                <div className='task__header'>
-                  <input onChange={finishTask} className='task__checkbox' type="checkbox" id={task.id} />
-                  <input type="text" onChange={setName} className='task__name' id={task.id}/>
-                  <button onClick={() => removeTask(task.id)} className='task__trash' id={task.id}>X</button>
-                </div>
-
-                <div className='task__body'>
-                  <textarea className='task__description'></textarea>
-                </div>
-              </div>
-            )
+             return <TaskItemCard
+                    task={task}
+                    nameOnChange={setName}
+                    descriptionOnChange={setDescription}
+                    statusOnChange={finishTask}
+                    transhOnClick={() => { removeTask(task.id) }}
+                  />
           }
         })}
       </div>
@@ -122,19 +119,13 @@ function App() {
             {tasks.map(task => {
               
               if (task.status == 'done') {
-                return (
-                  <div key={task.id} id={task.id} className='task'>
-                    <div className='task__header'>
-                      <input checked onChange={returnTask} className='task__checkbox' type="checkbox" id={task.id} />
-                      <input type="text" className='task__name' value={task.name} />
-                      <button onClick={() => removeTask(task.id)} className='task__trash'>X</button>
-                    </div>
-
-                    <div className='task__body'>
-                      <textarea className='task__description'>{task.description}</textarea>
-                    </div>
-                  </div>
-                )
+                return <TaskItemCard
+                    task={task}
+                    nameOnChange={setName}
+                    descriptionOnChange={setDescription}
+                    statusOnChange={returnTask}
+                    transhOnClick={() => { removeTask(task.id) }}
+                  />
               }
             })}
           </div>
