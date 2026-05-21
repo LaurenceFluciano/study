@@ -8,3 +8,8 @@ export type TaskItem = {
   description: string,
   status: TaskStatus
 }
+
+export type TaskAction =
+    | { type: "CREATE" } 
+    | { type: "REMOVE", id: string }
+    | { type: "UPDATE", payload: Omit<TaskItem, "id">, id: string }
