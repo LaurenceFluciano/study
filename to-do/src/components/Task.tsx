@@ -1,26 +1,68 @@
-import type { ChangeEvent } from "react";
-import type { TaskItem } from "../types/Task";
+import type { TaskItem, TaskStatus } from "../types/Task";
 
 type TaskItemProps = {
-    task: TaskItem,
-    statusOnChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    nameOnChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    descriptionOnChange: (e: ChangeEvent<HTMLTextAreaElement>) => void,
-    transhOnClick: () => void
-
+    task: TaskItem;
+    onTaskChange: (id: string, payload: Partial<TaskItem>) => void;
+    trashOnClick: (id: string) => void;
 }
 
-export default function TaskItemCard({task, statusOnChange, nameOnChange, descriptionOnChange, transhOnClick}: TaskItemProps) {
+export default function TaskItemCard({
+        task, 
+        onTaskChange, 
+        trashOnClick
+    }: TaskItemProps) {
+
+
+    const isDone = task.status === 'done';
+
+    const isTaskEmpty =  task.name == '' && task.description == ''
+
     return (
         <div className='task'>
             <div className='task__header'>
-                <input onChange={statusOnChange} className='task__checkbox' type="checkbox" id={task.id} />
-                <input type="text" onChange={nameOnChange} className='task__name' id={task.id}/>
-                <button onClick={transhOnClick} className='task__trash' id={task.id}>X</button>
+                <input 
+                    type="checkbox" 
+                    id={`task__checkbox-${task.id}`} 
+                    className='task__checkbox'
+
+                    disabled={isTaskEmpty}
+                    checked={isDone}
+                    onChange={(e) => {
+                        const newStatus: TaskStatus = e.target.checked ? 'done' : 'todo';
+                        onTaskChange(task.id, { status: newStatus });
+                    }}
+                />
+                <input 
+                    type="text" 
+                    id={`task__name-${task.id}`} 
+                    className='task__name' 
+                    value={task.name}
+                    
+                    autoFocus={isTaskEmpty}
+                    disabled={isDone}
+                    onChange={(e) => onTaskChange(task.id, { name: e.target.value })} 
+                />
+                    
+                <button 
+                    id={`task__trash-${task.id}`} 
+                    className='task__trash'
+                    
+                    onClick={() => trashOnClick(task.id)} 
+                > 
+                    X 
+                </button>
+
             </div>
 
             <div className='task__body'>
-                <textarea onChange={descriptionOnChange} className='task__description'></textarea>
+                <textarea
+                    id={`task__description-${task.id}`}  
+                    className='task__description'
+                    value={task.description}
+
+                    disabled={isDone}
+                    onChange={(e) => onTaskChange(task.id, { description: e.target.value })} 
+                ></textarea>
             </div>
         </div>
     )
