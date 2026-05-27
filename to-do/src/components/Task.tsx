@@ -1,21 +1,23 @@
-import type { TaskItem, TaskStatus } from "../types/Task";
+import type { TaskItem, TaskContent, TaskStatus } from "../lib/TaskType";
 
 type TaskItemProps = {
     task: TaskItem;
-    onTaskChange: (id: string, payload: Partial<TaskItem>) => void;
-    trashOnClick: (id: string) => void;
+    onTaskEdit: (id: string, payload: TaskContent) => void;
+    onTaskChangeStatus: (id: string, status: TaskStatus) => void;
+    onTaskDelete: (id: string) => void;
 }
 
-export default function TaskItemCard({
+export default function TaskItem({
         task, 
-        onTaskChange, 
-        trashOnClick
+        onTaskEdit,
+        onTaskChangeStatus,
+        onTaskDelete
     }: TaskItemProps) {
 
 
     const isDone = task.status === 'done';
 
-    const isTaskEmpty =  task.name == '' && task.description == ''
+    const isTaskContentEmpty =  task.title == '' && task.description == ''
 
     return (
         <div className='task'>
@@ -25,29 +27,29 @@ export default function TaskItemCard({
                     id={`task__checkbox-${task.id}`} 
                     className='task__checkbox'
 
-                    disabled={isTaskEmpty}
+                    disabled={isTaskContentEmpty}
                     checked={isDone}
                     onChange={(e) => {
                         const newStatus: TaskStatus = e.target.checked ? 'done' : 'todo';
-                        onTaskChange(task.id, { status: newStatus });
+                        onTaskChangeStatus(task.id, newStatus);
                     }}
                 />
                 <input 
                     type="text" 
                     id={`task__name-${task.id}`} 
                     className='task__name' 
-                    value={task.name}
+                    value={task.title}
                     
-                    autoFocus={isTaskEmpty}
+                    autoFocus={isTaskContentEmpty}
                     disabled={isDone}
-                    onChange={(e) => onTaskChange(task.id, { name: e.target.value })} 
+                    onChange={(e) => onTaskEdit(task.id, { title: e.target.value })} 
                 />
                     
                 <button 
                     id={`task__trash-${task.id}`} 
                     className='task__trash'
                     
-                    onClick={() => trashOnClick(task.id)} 
+                    onClick={() => onTaskDelete(task.id)} 
                 > 
                     X 
                 </button>
@@ -61,7 +63,7 @@ export default function TaskItemCard({
                     value={task.description}
 
                     disabled={isDone}
-                    onChange={(e) => onTaskChange(task.id, { description: e.target.value })} 
+                    onChange={(e) => onTaskEdit(task.id, { description: e.target.value })} 
                 ></textarea>
             </div>
         </div>
