@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import type { Task, TaskStatus } from "../../../lib/TaskTypes";
-import { TaskContext } from "../TaskBoard/TaskContext";
+import type { Task, TaskStatus } from "../core/TaskTypes";
+import { useTasksContext } from "../TasksBoard/hooks/useTaskContext";
 
 type TaskItemProps = {
     task: Task;
@@ -10,12 +9,7 @@ export default function TaskItem({
         task, 
     }: TaskItemProps) {
 
-    const handlers = useContext(TaskContext)?.taskHandlers;
-
-    if (!handlers) {
-        return (<div>Ocorreu um erro ao renderizar</div>);
-    }
-
+    const handlers = useTasksContext().taskHandlers;
 
     const isDone = task.status === 'done';
 

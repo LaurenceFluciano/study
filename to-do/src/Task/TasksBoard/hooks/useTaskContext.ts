@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { TaskContext } from "../components/Task/TaskBoard/TaskContext";
+import { TasksContext } from "../Context";
 
-export function useTaskContext() {
-    const context = useContext(TaskContext);
+export function useTasksContext() {
+    const context = useContext(TasksContext);
     if (!context) throw new Error("Componentes Task devem ser usados dentro de <Task.Root>");
     return context;
 }

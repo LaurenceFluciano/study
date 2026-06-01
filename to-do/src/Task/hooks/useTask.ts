@@ -1,6 +1,6 @@
 import { useReducer } from "react";
-import { taskReducer } from "../lib/TaskReducer";
-import type { TaskContent, TaskStatus } from "../lib/TaskTypes";
+import { taskReducer } from "../core/TaskReducer";
+import type { TaskContent, TaskStatus } from "../core/TaskTypes";
 
 export interface TaskHandlers {
     handleTaskEdit(id: string, payload: TaskContent): void;

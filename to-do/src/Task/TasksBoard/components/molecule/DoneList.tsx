@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { useTaskContext } from "../../../hooks/useTaskContext";
-import TaskItem from "../TaskItem/TaskItem";
+import TaskItem from "../../../TaskItem/TaskItem";
+import { useTasksContext } from "../../hooks/useTaskContext";
 
 export function DoneList() {
-    const { tasks } = useTaskContext();
+    const { tasks } = useTasksContext();
     const doneTasks = useMemo(() => tasks.filter(t => t.status === 'done'), [tasks]);
 
     return (

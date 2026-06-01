@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { useTaskContext } from "../../../hooks/useTaskContext";
-import TaskItem from "../TaskItem/TaskItem";
+import { useTasksContext } from "../../hooks/useTaskContext";
+import TaskItem from "../../../TaskItem/TaskItem";
 
 
 export function TodoList() {
-    const { tasks } = useTaskContext();
+    const { tasks } = useTasksContext();
     const todoTasks = useMemo(() => tasks.filter(t => t.status === 'todo'), [tasks]);
 
     return (

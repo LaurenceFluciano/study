@@ -1,24 +1,24 @@
-import Task from "./components/Task/TaskBoard/Task"
+import Tasks from "./Task/TasksBoard/Index"
 import "./styles/global.css"
 
 function App() {
 
   return (
-    <Task.Board>
-        <Task.Todo>
-          <Task.Header title="To-do">
-            <Task.Actions>
-              <Task.ButtonCreate />
-            </Task.Actions>
-          </Task.Header>
-          <Task.TodoList />
-        </Task.Todo>
+    <Tasks.Board>
+        <Tasks.Todo>
+          <Tasks.Header title="To-do">
+            <Tasks.Actions>
+              <Tasks.ButtonCreate />
+            </Tasks.Actions>
+          </Tasks.Header>
+          <Tasks.TodoList />
+        </Tasks.Todo>
 
-        <Task.Done>
-          <Task.Header title="Done" />
-          <Task.DoneList />
-        </Task.Done>
-    </Task.Board>
+        <Tasks.Done>
+          <Tasks.Header title="Done" />
+          <Tasks.DoneList />
+        </Tasks.Done>
+    </Tasks.Board>
   )
 }
 
