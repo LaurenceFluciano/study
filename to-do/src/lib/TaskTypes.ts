@@ -2,14 +2,14 @@ export type TaskStatus = |
   'done' |
   'todo'
 
-export type TaskItem = {
+export type Task = {
   id: string,
   title: string,
   description: string,
   status: TaskStatus
 }
 
-export type TaskContent = Partial<Omit<TaskItem, "id" | "status">>
+export type TaskContent = Partial<Omit<Task, "id" | "status">>
 
 export type TaskAction =
     | { type: "CREATE", id: string } 

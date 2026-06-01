@@ -1,14 +1,18 @@
-import { useMemo, useReducer } from "react";
+import { useReducer } from "react";
 import { taskReducer } from "../lib/TaskReducer";
-import type { TaskContent, TaskStatus } from "../lib/TaskType";
+import type { TaskContent, TaskStatus } from "../lib/TaskTypes";
+
+export interface TaskHandlers {
+    handleTaskEdit(id: string, payload: TaskContent): void;
+    handleTaskStatus(id: string, status: TaskStatus): void;
+    handleTaskDelete(id: string): void;
+    handleTaskCreate(): void;
+}
 
 export function useTask() {
-    const [state, dispatch] = useReducer(taskReducer, []);
+    const [tasks, dispatch] = useReducer(taskReducer, []);
 
-    const doneTask = useMemo(() => state.filter(task => task.status === 'done'), [state]);
-    const todoTask = useMemo(() => state.filter(task => task.status === 'todo'), [state]);
-
-    const taskHandlers = useMemo(() => ({
+    const taskHandlers: TaskHandlers = {
             handleTaskEdit: (id: string, payload: TaskContent) => {
                 dispatch({ type: "EDIT", id, payload });
             },
@@ -22,11 +26,11 @@ export function useTask() {
                 const id = crypto.randomUUID();
                 dispatch({ type: "CREATE", id });
             }
-        }), []);
+        }
+        
 
     return {
-        doneTask,
-        todoTask,
+        tasks,
         taskHandlers
     }
 }

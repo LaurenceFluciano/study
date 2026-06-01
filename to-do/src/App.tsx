@@ -1,56 +1,24 @@
-import TaskItem from './components/Task';
-import "./styles/style.css"
-import { useTask } from './hooks/useTask';
+import Task from "./components/Task/TaskBoard/Task"
+import "./styles/global.css"
 
 function App() {
-  const {
-    doneTask,
-    todoTask,
-    taskHandlers
-  } = useTask();
-  
 
   return (
-    <div className='task-board'>
-      
-      <div className='task-group'>
-        <div className='task-group__header'>
-            <span className='task-group__title'>To-do</span>
-            <button className='task-group__button' onClick={taskHandlers.handleTaskCreate}>+</button>
-        </div>
+    <Task.Board>
+        <Task.Todo>
+          <Task.Header title="To-do">
+            <Task.Actions>
+              <Task.ButtonCreate />
+            </Task.Actions>
+          </Task.Header>
+          <Task.TodoList />
+        </Task.Todo>
 
-        <div className='task-group__list'>
-          {todoTask.map((task) =>(
-            <TaskItem
-              key={task.id}
-              task={task}
-              onTaskChangeStatus={taskHandlers.handleTaskStatus}
-              onTaskEdit={taskHandlers.handleTaskEdit}
-              onTaskDelete={taskHandlers.handleTaskDelete}
-            />
-          ))}
-        </div>
-      </div>
-      
-      <div className='task-group'>
-        <div className='task-group__header'>
-            <span className='task-group__title'>Done</span>
-        </div>
-            
-        <div className='task-group__list'>
-          {doneTask.map(task => 
-            <TaskItem
-                key={task.id}
-                task={task}
-                onTaskChangeStatus={taskHandlers.handleTaskStatus}
-                onTaskEdit={taskHandlers.handleTaskEdit}
-                onTaskDelete={taskHandlers.handleTaskDelete}
-            />
-          )}
-        </div>
-      </div>
-    
-    </div>
+        <Task.Done>
+          <Task.Header title="Done" />
+          <Task.DoneList />
+        </Task.Done>
+    </Task.Board>
   )
 }
 

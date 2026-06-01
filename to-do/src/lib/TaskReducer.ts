@@ -1,7 +1,7 @@
-import { createTask, removeTask, editTask, changeStatusTask } from "./TaskActionsMethod";
-import type { TaskItem, TaskAction } from "./TaskType";
+import { createTask, removeTask, editTask, changeStatusTask } from "./TaskActions";
+import type { Task, TaskAction } from "./TaskTypes";
 
-export function taskReducer(state: TaskItem[], action: TaskAction) {
+export function taskReducer(state: Task[], action: TaskAction) {
     switch (action.type) {
         case "CREATE":
             return createTask(state, action.id)

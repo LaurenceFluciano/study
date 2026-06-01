@@ -1,18 +1,20 @@
-import type { TaskItem, TaskContent, TaskStatus } from "../lib/TaskType";
+import { useContext } from "react";
+import type { Task, TaskStatus } from "../../../lib/TaskTypes";
+import { TaskContext } from "../TaskBoard/TaskContext";
 
 type TaskItemProps = {
-    task: TaskItem;
-    onTaskEdit: (id: string, payload: TaskContent) => void;
-    onTaskChangeStatus: (id: string, status: TaskStatus) => void;
-    onTaskDelete: (id: string) => void;
+    task: Task;
 }
 
 export default function TaskItem({
         task, 
-        onTaskEdit,
-        onTaskChangeStatus,
-        onTaskDelete
     }: TaskItemProps) {
+
+    const handlers = useContext(TaskContext)?.taskHandlers;
+
+    if (!handlers) {
+        return (<div>Ocorreu um erro ao renderizar</div>);
+    }
 
 
     const isDone = task.status === 'done';
@@ -20,50 +22,50 @@ export default function TaskItem({
     const isTaskContentEmpty =  task.title == '' && task.description == ''
 
     return (
-        <div className='task'>
-            <div className='task__header'>
+        <div className='task-item'>
+            <div className='task-item__header'>
                 <input 
                     type="checkbox" 
-                    id={`task__checkbox-${task.id}`} 
-                    className='task__checkbox'
+                    id={`task-item__checkbox-${task.id}`} 
+                    className='task-item__checkbox'
 
                     disabled={isTaskContentEmpty}
                     checked={isDone}
                     onChange={(e) => {
                         const newStatus: TaskStatus = e.target.checked ? 'done' : 'todo';
-                        onTaskChangeStatus(task.id, newStatus);
+                        handlers.handleTaskStatus(task.id, newStatus);
                     }}
                 />
                 <input 
                     type="text" 
-                    id={`task__name-${task.id}`} 
-                    className='task__name' 
+                    id={`task-item__name-${task.id}`} 
+                    className='task-item__name' 
                     value={task.title}
                     
                     autoFocus={isTaskContentEmpty}
                     disabled={isDone}
-                    onChange={(e) => onTaskEdit(task.id, { title: e.target.value })} 
+                    onChange={(e) => handlers.handleTaskEdit(task.id, { title: e.target.value })} 
                 />
                     
                 <button 
-                    id={`task__trash-${task.id}`} 
-                    className='task__trash'
+                    id={`task-item__trash-${task.id}`} 
+                    className='task-item__trash'
                     
-                    onClick={() => onTaskDelete(task.id)} 
+                    onClick={() => handlers.handleTaskDelete(task.id)} 
                 > 
                     X 
                 </button>
 
             </div>
 
-            <div className='task__body'>
+            <div className='task-item__body'>
                 <textarea
                     id={`task__description-${task.id}`}  
                     className='task__description'
                     value={task.description}
 
                     disabled={isDone}
-                    onChange={(e) => onTaskEdit(task.id, { description: e.target.value })} 
+                    onChange={(e) => handlers.handleTaskEdit(task.id, { description: e.target.value })} 
                 ></textarea>
             </div>
         </div>

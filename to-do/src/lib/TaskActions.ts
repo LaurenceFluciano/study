@@ -1,6 +1,6 @@
-import type { TaskItem, TaskContent, TaskStatus } from "./TaskType";
+import type { Task, TaskContent, TaskStatus } from "./TaskTypes";
 
-export const createTask = (state: TaskItem[], id: string) => {
+export const createTask = (state: Task[], id: string) => {
 
     const cleanedState = state.filter(task => {
         const isEmpty = task.title.trim() === '' && task.description.trim() === '';
@@ -15,18 +15,18 @@ export const createTask = (state: TaskItem[], id: string) => {
         title: '',
         description: '',
         status: 'todo'
-        } as TaskItem
+        } as Task
     ]
 }
 
-export const removeTask = (tasks: TaskItem[], id: string) => {
+export const removeTask = (tasks: Task[], id: string) => {
     
     return tasks.filter(task =>
         task.id !== id
     );
 }
 
-export const editTask = (tasks: TaskItem[], payload: TaskContent, id: string) => {
+export const editTask = (tasks: Task[], payload: TaskContent, id: string) => {
     
     return tasks.map(task => {
             if (task.id === id) {
@@ -36,7 +36,7 @@ export const editTask = (tasks: TaskItem[], payload: TaskContent, id: string) =>
         })
 }
 
-export const changeStatusTask = (tasks: TaskItem[], status: TaskStatus, id: string) => {
+export const changeStatusTask = (tasks: Task[], status: TaskStatus, id: string) => {
     return tasks.map(task => {
         if (task.id === id) {
             return {
